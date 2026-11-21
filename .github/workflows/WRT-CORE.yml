@@ -212,6 +212,8 @@ jobs:
         run: |
           cd ./wrt/
 
+          grep -q "^src-git nikki " feeds.conf.default || echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> feeds.conf.default
+
           # Feeds fetch dozens of git remotes; retry the whole pass instead of
           # dying on one reset. `update` is incremental, so a retry is cheap.
           ./scripts/feeds update -a || { echo "feeds update failed, retrying"; sleep 15; ./scripts/feeds update -a; }
